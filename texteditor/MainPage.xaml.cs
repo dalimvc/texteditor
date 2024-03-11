@@ -53,6 +53,7 @@ namespace texteditor
         //at the end newFileOpened and newFileStarted would be false
         private void TextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
+            Debug.WriteLine(fileName);
             if (newFileStarted)
             {
                 FileName.Text = fileName;
@@ -210,6 +211,7 @@ namespace texteditor
                 string textToSave = TextValue.Text;
                 await Windows.Storage.FileIO.WriteTextAsync(savedLocation, textToSave);
                 Debug.WriteLine(savedLocation.Name);
+                fileName = savedLocation.Name;
                 FileName.Text = savedLocation.Name;
                 isFileSaved = true;
             }
@@ -222,6 +224,7 @@ namespace texteditor
                 if (savedLocation != null)
                 {
                     await Windows.Storage.FileIO.WriteTextAsync(savedLocation, textToSave);
+                    fileName = savedLocation.Name;
                     FileName.Text = savedLocation.Name;
                     isFileSaved = true;
                 }
@@ -242,6 +245,7 @@ namespace texteditor
             }
             if (savedLocation != null)
             {
+                fileName = savedLocation.Name;
                 FileName.Text = savedLocation.Name;
                 isFileSaved = true;
             }
